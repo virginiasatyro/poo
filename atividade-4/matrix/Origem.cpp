@@ -78,11 +78,10 @@ int main()
 	//Teste da função get(int ls, int cs) const;
 
 	cout << "Obter o valor da posição de uma matriz M(linha,coluna) por meio da funcao get,passando como parametro a liha e coluna desejada:" << endl;
-	cout << "Teste: Valor da posicao Y(1,1)" <<Y.get(1,1)<< endl;
+	cout << "Teste: Valor da posicao Y(1,1)" <<  Y.get(1, 1) << endl;
 
-	cout << "Teste: Valor da posicao Y(5,5), OBS( Matriz esta do tamanho 2x3: " << Y.get(5, 5) << endl;
-
-
+	cout << "Teste: Valor da posicao Y(5,5), OBS( Matriz esta do tamanho 2x3: "<<endl;
+	cout << Y.get(5, 5) << endl;
 
 
 	File.close();
