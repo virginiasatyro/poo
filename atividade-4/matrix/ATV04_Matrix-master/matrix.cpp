@@ -27,8 +27,6 @@ Matrix::Matrix(int rows, int cols, const double &value)
 
 Matrix::Matrix(std:: ifstream &myFile)
 {
-	myFile.open("myfile.doc");
-
 	if (myFile.fail() == 1) 
 	{
 		cout << " Arquivo fonte de texto nao encontrado \n Favor verificar a existencia do arquivo myfile.txt no diretorio de origem\n" << endl;
@@ -46,9 +44,7 @@ Matrix::Matrix(std:: ifstream &myFile)
 		for (int i = 0; i < nRows; i++)
 			for (int j = 0; j < nCols; j++)
 				myFile >> m[i][j];	
-		
 	}
-	myFile.close();
 }
 
 Matrix::Matrix(const Matrix &that)
