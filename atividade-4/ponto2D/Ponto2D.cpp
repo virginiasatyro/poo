@@ -7,8 +7,8 @@ using namespace std;
 Ponto::Ponto(double x, double y)
 {
 	cout << "construtor padrao";
-	_x = x;
-	_y = y;
+	setX(x);
+	setY(y);
 	_id++;
 }
 //Construtor de copia
@@ -26,6 +26,22 @@ Ponto::~Ponto() {
 }
 
 int Ponto::_id = 0; // atribuidor do valor para o static contador do numero de pontos criado
+
+//Basic setters
+inline void Ponto::setX(double x)
+{
+	this->_x = x;
+}
+
+inline void Ponto::setY(double y)
+{
+	this->_y = y;
+}
+	
+inline void Ponto::setId(int id)
+{
+	this->_id = id;
+}
 
 //Basic getters
 int  Ponto::getNextId ()const

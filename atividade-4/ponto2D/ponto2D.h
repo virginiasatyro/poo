@@ -16,6 +16,11 @@ public:
 	//Destructor
 	~Ponto();
 
+	//Basic setters
+	inline void setX(double);
+	inline void setY(double);
+	inline void setId(int);
+
 	//Basic getters
 	int getNextId() const ;
 	inline double getX() const;
@@ -31,10 +36,10 @@ public:
 };
 #endif // PONTO2D_H
 
-/*// formas usuais (já implementadas)
+/*// formas usuais (jï¿½ implementadas)
 Ponto2D p1;
 Ponto2D p2(3.0, 4.0);
-// inicializações usando o construtor de cópia
-Ponto2D p3(p1); // Ponto2D p3 é inicializado com as coordenadas do ponto p1
-Ponto2D p4 = p2; // Ponto2D p4 é inicializado com as coordenadas do ponto p2
+// inicializaï¿½ï¿½es usando o construtor de cï¿½pia
+Ponto2D p3(p1); // Ponto2D p3 ï¿½ inicializado com as coordenadas do ponto p1
+Ponto2D p4 = p2; // Ponto2D p4 ï¿½ inicializado com as coordenadas do ponto p2
 */
