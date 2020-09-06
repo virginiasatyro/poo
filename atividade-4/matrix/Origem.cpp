@@ -14,7 +14,7 @@ int main()
 	//Teste dos diferentes tipos de construtores
 	Matrix Z(File);
 	Matrix Y(3, 2,7.1);
-	Matrix X(4, 1, 4);
+	Matrix X(4, 4, 4); // Matrix quadrada para transformar em identidade
 	Matrix W;
 	Matrix K(1, 2);
 	
@@ -50,12 +50,37 @@ int main()
 	Y.print();
 	std::cout << "Numero de linhas de Y:: " << Y.getRows();
 	std::cout << "Numero de colunas de Y:: " << Y.getCols();
-	
-	std::cout << std::endl << "X:: " << std::endl;
+
+	//Teste de novas funções
+	cout << "Matriz X em identidade:" << endl;
+	X.unit();
+	std::cout << endl << "X:: " << std::endl;
 	X.print();
-	
-	std::cout << "Numero de linhas de X:: " << X.getRows();
-	std::cout << "Numero de colunas de X:: " << X.getCols();
+
+	//Teste incoerencia: transformar matriz nao quadrada em identidade
+	Y.unit();
+	std::cout << endl << "Y:: " << std::endl;
+	Y.print();
+
+	//Teste da função zeros();
+	cout << "Transformar matriz Z uma matriz de 0" << endl;
+	Z.zeros();
+	std::cout << endl << "Z:: " << std::endl;
+	Z.print();
+
+	//Teste da função ones();
+
+	cout << "Transformar matriz Y uma matriz de 1" << endl;
+	Y.zeros();
+	std::cout << endl << "Y:: " << std::endl;
+	Y.print();
+
+	//Teste da função get(int ls, int cs) const;
+
+	cout << "Obter o valor da posição de uma matriz M(linha,coluna) por meio da funcao get,passando como parametro a liha e coluna desejada:" << endl;
+	cout << " acesando a posicao "
+
+
 
 	File.close();
 	return 0;
