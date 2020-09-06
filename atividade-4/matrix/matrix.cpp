@@ -36,7 +36,11 @@ Matrix::Matrix(int rows, int cols, const double &value)
 		}
 		else
 		{	
-		cout"Parametros incorretos ou matriz 0x0, retornando matriz 0x0"<<endl;
+		cout<<"Parametros incorretos , retornando matriz 0x0"<<endl;
+		nRows = 0;
+		nCols = 0;
+		m = NULL;
+
 		}
 		
 	}
@@ -96,16 +100,18 @@ int Matrix::getCols() const
 	return nCols;
 }
 
-double Matrix:: get(int ls, int cs) const
+double Matrix::get(int ls, int cs) const
 {
-	if ((ls > 0)&& (cs > 0)){
-		if (ls <= (nRows+1))
-			if (cs <= (nCols+1))
-				return m[ls-1][cs-1];}
-	
+	if ((ls > 0) && (cs > 0)) {
+		if (ls <= (nRows + 1))
+			if (cs <= (nCols + 1))
+				return m[ls - 1][cs - 1];
+	}
+
 	else {
-		cout<<"posicao invalida"<endl;
+		cout << "posicao invalida, return -1" < endl;
 		return -1;
+	}
 }
 // torna a matriz transposta
 void Matrix::transpose() 
