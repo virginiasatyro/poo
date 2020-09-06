@@ -103,8 +103,8 @@ int Matrix::getCols() const
 double Matrix::get(int ls, int cs) const
 {
 	if ((ls > 0) && (cs > 0)) {
-		if (ls <= (nRows + 1)) {
-			if (cs <= (nCols + 1)) {
+		if (ls <= nRows) {
+			if (cs <= nCols ) {
 				return m[ls - 1][cs - 1];
 			} else {
 				cout << "posicao invalida - terceiro if, return -1" << endl;
