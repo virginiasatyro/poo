@@ -15,14 +15,30 @@ Matrix::Matrix()
 
 Matrix::Matrix(int rows, int cols, const double &value) 
 {
-	nRows = rows;
-	nCols = cols;
-	m = new double*[nRows];
-	for (int i = 0; i < nRows; i++)
-		m[i] = new double[nCols];
-	for (int i = 0; i < nRows; i++) {
-		for (int j = 0; j < nCols; j++)
-			m[i][j] = value;
+	if ((rows> 0) && (cols > 0)){
+		nRows = rows;
+		nCols = cols;
+		
+		m = new double*[nRows];
+		for (int i = 0; i < nRows; i++)
+			m[i] = new double[nCols];
+		for (int i = 0; i < nRows; i++) {
+			for (int j = 0; j < nCols; j++)
+				m[i][j] = value;
+		}
+	}
+	else {
+		if((rows==0)&&(cols==0))
+		{
+			nRows = 0;
+			nCols = 0;
+			m = NULL;
+		}
+		else
+		{	
+		cout"Parametros incorretos ou matriz 0x0, retornando matriz 0x0"<<endl;
+		}
+		
 	}
 }
 
@@ -82,12 +98,13 @@ int Matrix::getCols() const
 
 double Matrix:: get(int ls, int cs) const
 {
-	if (ls <= (nRows+1))
-		if (cs <= (nCols+1))
-			return m[ls-1][cs-1];
-		else
-			return -1;	
-	else 
+	if ((ls > 0)&& (cs > 0)){
+		if (ls <= (nRows+1))
+			if (cs <= (nCols+1))
+				return m[ls-1][cs-1];}
+	
+	else {
+		cout<<"posicao invalida"<endl;
 		return -1;
 }
 // torna a matriz transposta
