@@ -82,8 +82,8 @@ int Matrix::getCols() const
 
 double Matrix:: get(int ls, int cs) const
 {
-	if (ls < (nRows+1))
-		if (cs < (nCols+1))
+	if (ls <= (nRows+1))
+		if (cs <= (nCols+1))
 			return m[ls-1][cs-1];
 		else
 			return -1;	
