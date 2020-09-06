@@ -16,9 +16,9 @@ private:
 public:
 
 	// Construtores
-	Matrix();
+	//Matrix(); teoricamente eliminado se criar um construtor default abaixo rows=0, cols=0
 	//NOVO CODIGO
-	Matrix(int rows, int cols, const double &value = 0.0);
+	Matrix(int rows=0, int cols=0, const double &value = 0.0);
 	Matrix(std::ifstream &myFile);
 	Matrix(const Matrix &that);
 	//
