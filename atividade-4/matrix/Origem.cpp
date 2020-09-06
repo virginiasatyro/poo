@@ -70,15 +70,18 @@ int main()
 
 	//Teste da função ones();
 
-	cout << "Transformar matriz Y uma matriz de 1" << endl;
-	Y.zeros();
-	std::cout << endl << "Y:: " << std::endl;
-	Y.print();
+	cout << "Transformar matriz Z uma matriz de 1" << endl;
+	Z.zeros();
+	std::cout << endl << "Z:: " << std::endl;
+	Z.print();
 
 	//Teste da função get(int ls, int cs) const;
 
 	cout << "Obter o valor da posição de uma matriz M(linha,coluna) por meio da funcao get,passando como parametro a liha e coluna desejada:" << endl;
-	cout << " acesando a posicao "
+	cout << "Teste: Valor da posicao Y(1,1)" <<Y.get(1,1)<< endl;
+
+	cout << "Teste: Valor da posicao Y(5,5), OBS( Matriz esta do tamanho 2x3: " << Y.get(5, 5) << endl;
+
 
 
 
