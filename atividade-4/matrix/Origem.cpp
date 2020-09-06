@@ -14,7 +14,7 @@ int main()
 	//Teste dos diferentes tipos de construtores
 	Matrix Z(File);
 	Matrix Y(3, 2,7.1);
-	Matrix X(4, 1,4);
+	Matrix X(4, 1, 4);
 	Matrix W;
 	Matrix K(1, 2);
 	
