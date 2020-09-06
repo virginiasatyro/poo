@@ -12,6 +12,7 @@ Matrix::Matrix()
 	m = NULL;
 }
 
+
 Matrix::Matrix(int rows, int cols, const double &value) 
 {
 	nRows = rows;
