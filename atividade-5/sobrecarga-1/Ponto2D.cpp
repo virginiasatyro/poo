@@ -3,13 +3,13 @@
 #include <math.h>
 
 using namespace std;
-//Constructor Default
-Ponto::Ponto(double x, double y)
-{
-	cout << "construtor padrao";
-	setX(x);
-	setY(y);
-	_id++;
+
+int Ponto::_id = 0; // atribuidor do valor para o static contador do numero de pontos criado
+
+Ponto::Ponto(double x, double y){
+    _x = x;
+    _y = y;
+    _id++;
 }
 //Construtor de copia
 Ponto::Ponto(const Ponto &Point) 
@@ -25,7 +25,18 @@ Ponto::~Ponto() {
 	_id--;
 }
 
-int Ponto::_id = 0; // atribuidor do valor para o static contador do numero de pontos criado
+// Métodos da atividade 05
+Ponto& Ponto::operator-- (){
+    this->_x -= 1;
+    this->_y -= 1;
+    return *this;
+}
+Ponto Ponto::operator+ (const Ponto& p) const{
+    Ponto novo;
+    novo._x = this->_x + p._x;
+    novo._y = this->_y + p._y;
+    return novo;
+}
 
 //Basic setters
 inline void Ponto::setX(double x)
