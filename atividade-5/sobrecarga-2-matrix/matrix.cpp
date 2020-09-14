@@ -78,7 +78,7 @@ Matrix::Matrix(const Matrix &that)
 		this->m[i] = new double[this->nCols];
 	for (int i = 0; i < this->nRows; i++) {
 		for (int j = 0; j < this->nCols; j++)
-			this->m[i][j] = that.get(i,j);
+			this->m[i][j] = that.m[i][j];
 	}
 }
 
@@ -117,7 +117,7 @@ double Matrix::get(int ls, int cs) const
 		}
 	}
 	else {
-		cout << "posicao invalida, return -1" << endl;
+		cout << "posicao invalida funcao get, return -1" << endl;
 		return -1;
 	}
 }
@@ -179,4 +179,157 @@ void Matrix::ones()
 	for (int i = 0; i < nRows; i++)
 		for (int j = 0; j < nCols; j++)
 			m[i][j] = 1.0;
+}
+
+//Sobrecarga de operadores
+Matrix Matrix::operator+ (const Matrix &Right) 
+{
+	if ((this->nRows==Right.nRows) && (this->nCols==Right.nCols))
+	{	
+		Matrix aux(this->nRows,this-> nCols);
+		for (int i = 0; i < nRows; i++)
+			for (int j = 0; j < nCols; j++)
+				aux.m[i][j] = this->m[i][j]+ Right.m[i][j];
+
+		return aux;
+	}
+	
+	Matrix aux;
+	return aux;
+}
+
+Matrix Matrix::operator- (const Matrix &Right)
+{
+	if ((this->nRows == Right.nRows) && (this->nCols == Right.nCols))
+	{
+		Matrix aux(nRows, nCols);
+		for (int i = 0; i < nRows; i++)
+			for (int j = 0; j < nCols; j++)
+				aux.m[i][j] = this->m[i][j] - Right.m[i][j];
+		return aux;
+	}
+	Matrix aux;
+	return aux;
+}
+
+Matrix& Matrix::operator=(const Matrix &Right)
+{
+	if ((this->nRows == Right.nRows) && (this->nCols == Right.nCols))
+	{
+		if (this == &Right) return *this; //Solução de auto atribuição
+		this->~Matrix();
+		m = new double*[this->nRows];
+		for (int i = 0; i <this-> nRows; i++)
+			 m[i] = new double[this->nCols];
+
+		for (int i = 0; i < this->nRows; i++)
+			for (int j = 0; j <this-> nCols; j++)
+				this->m[i][j]= Right.m[i][j];
+	}
+	return *this;
+}
+
+ bool Matrix:: operator== (const Matrix &Right) 
+{
+	 bool igualdade = true;
+	 if ((this->nRows == Right.nRows) && (this->nCols == Right.nCols))
+	 {
+		 for (int i = 0; i < nRows; i++)
+			 for (int j = 0; j < nCols; j++)
+				 if (this->m[i][j]!=Right.m[i][j])
+				 {
+					 igualdade = false;
+					 return igualdade;
+				 }	 
+	 }
+	 return igualdade;
+}
+
+ bool Matrix::operator!= (const Matrix &Right) 
+{
+	 bool igualdade = false;
+	 if ((this->nRows == Right.nRows) && (this->nCols == Right.nCols))
+	 {
+		 for (int i = 0; i < nRows; i++)
+			 for (int j = 0; j < nCols; j++)
+				 if (this->m[i][j] != Right.m[i][j])
+				 {
+					 igualdade = true;
+					 return igualdade;
+				 }
+	 }
+	 return igualdade;
+}
+
+Matrix Matrix::operator* (const Matrix &Right) 
+{
+	if ((this->nRows == Right.nCols) && (this->nCols == Right.nRows))
+	{
+		Matrix aux(this->nCols,Right.nRows);
+		for (int i = 0; i < this->nCols; i++)
+		{
+			for (int j = 0; j < this->nRows; j++)
+			{
+				for (int k = 0; k < this->nCols; k++)
+				{
+					aux.m[i][j]+= this->m[i][k] * Right.m[k][j];
+				}
+			}
+		}	
+		return aux;
+	}
+	Matrix aux;
+	return aux;
+}
+
+Matrix Matrix::operator~ () // Transposta
+{
+	Matrix aux(this->nCols, this->nRows);
+
+	for (int i = 0; i < this->nRows; i++)
+		for (int j = 0; j < this->nCols; j++)
+		{
+			aux.m[i][j] = this->m[j][i];
+		}
+	return aux;
+}
+
+double& Matrix::operator() (const int& ls, const int& cs) const
+{
+	return this->m[ls - 1][cs - 1];
+}
+
+Matrix& Matrix::operator -= (const Matrix &Right)
+{
+	if ((this->nRows == Right.nRows) && (this->nCols == Right.nCols))
+	{
+		for (int i = 0; i < nRows; i++)
+			for (int j = 0; j < nCols; j++)
+					this->m[i][j] -= Right.m[i][j];
+	}
+	return *this;
+}
+Matrix& Matrix::operator += (const Matrix &Right)
+{
+	if ((this->nRows == Right.nRows) && (this->nCols == Right.nCols))
+	{
+		for (int i = 0; i < nRows; i++)
+			for (int j = 0; j < nCols; j++)
+				this->m[i][j] += Right.m[i][j];
+	}
+	return *this;
+}
+Matrix& Matrix::operator *= (const double n)
+{
+	for (int i = 0; i < nRows; i++)
+		for (int j = 0; j < nCols; j++)
+			this->m[i][j] *= n;
+return *this;
+}
+Matrix& Matrix::operator *= (const Matrix &Right)
+{
+	for (int i = 0; i < nRows; i++)
+		for (int j = 0; j < nCols; j++)
+			this->m[i][j] *= Right.m[i][j];
+	return *this;
 }
