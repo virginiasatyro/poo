@@ -17,7 +17,6 @@ public:
 
 	// Construtores
 	Matrix(); 
-	//NOVO CODIGO
 	Matrix(int rows, int cols, const double &value = 0.0);
 	Matrix(std::ifstream &myFile);
 	Matrix(const Matrix &that);
@@ -28,17 +27,26 @@ public:
 	// basic getters
 	int getRows() const;
 	int getCols() const;
-	//Nova função
 	double get(int ls, int cs) const;
-	//
-
-	// other methods
+	//Funções
 	void transpose();
 	void print() const;
-	//NOVOS METODOS
 	void unit();
 	void zeros();
 	void ones();
-
+	//Sobrecarga de operando
+	Matrix operator + (const Matrix &Right) ;
+	Matrix operator - (const Matrix &Right) ;
+	Matrix& operator =(const Matrix &Right);
+	bool operator == (const Matrix &Right);
+	bool operator != (const Matrix &Right);
+	double& operator() (const int &ls,const int &cs) const;
+	Matrix operator * (const Matrix &Right) ;
+	Matrix operator ~();
+	Matrix& operator -= (const Matrix &Right);
+	Matrix& operator += (const Matrix &Right);
+	Matrix& operator *= (const double n);
+	Matrix& operator *= (const Matrix &Right);
+	/* OPERACOES  << >>  */
 };
 #endif //MATRIX_H
