@@ -1,15 +1,8 @@
-#include<iostream> 
+#include <iostream>
+#include "ponto2D.h"
 
-class Ponto2D{
-    
-    int x,y;
-    
-    public:
-        Ponto(int xx=0, int yy=0):x(xx),y(yy){ };
-        Ponto& operator-- ();
-        Ponto operator+ (const Ponto& ) const;
-        ~Ponto(){}; 
-};
+
+using namespace std;
 
 int main() {
 
