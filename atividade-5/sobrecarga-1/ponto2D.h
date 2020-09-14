@@ -15,7 +15,9 @@ public:
 	Ponto(const Ponto &Point);
 	//Destructor
 	~Ponto();
-
+    	// Métodos da atividade 05
+    	Ponto& operator-- ();
+    	Ponto operator+ (const Ponto& ) const;
 	//Basic setters
 	inline void setX(double);
 	inline void setY(double);
