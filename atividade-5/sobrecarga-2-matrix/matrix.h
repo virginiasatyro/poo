@@ -48,5 +48,9 @@ public:
 	Matrix& operator *= (const double n);
 	Matrix& operator *= (const Matrix &Right);
 	/* OPERACOES  << >>  */
+	/* OPERACOES  << >>  */
+	
+	friend std::istream& operator >> (std::istream& text, Matrix& Right);
+	friend std::ostream& operator << (std::ostream& text, const Matrix& Right);
 };
 #endif //MATRIX_H
