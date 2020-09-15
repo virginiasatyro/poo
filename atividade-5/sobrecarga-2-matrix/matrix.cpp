@@ -16,6 +16,8 @@ Matrix::Matrix()
 
 Matrix::Matrix(int rows, int cols, const double &value) 
 {
+	cout << "construindo matriz...\n";
+
 	if ((rows> 0) && (cols > 0)){
 		nRows = rows;
 		nCols = cols;
@@ -291,10 +293,12 @@ Matrix Matrix::operator~ () // Transposta
 	Matrix aux(this->nCols, this->nRows);
 
 	for (int i = 0; i < this->nRows; i++)
+	{
 		for (int j = 0; j < this->nCols; j++)
 		{
-			aux.m[i][j] = this->m[j][i];
+			aux.m[j][i] = this->m[i][j];
 		}
+	}
 	return aux;
 }
 
