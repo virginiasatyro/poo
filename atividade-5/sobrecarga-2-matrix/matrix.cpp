@@ -16,8 +16,6 @@ Matrix::Matrix()
 
 Matrix::Matrix(int rows, int cols, const double &value) 
 {
-	cout << "construindo matriz...\n";
-
 	if ((rows> 0) && (cols > 0)){
 		nRows = rows;
 		nCols = cols;
@@ -81,14 +79,13 @@ Matrix::Matrix(const Matrix &that)
 		this->m[i] = new double[this->nCols];
 	for (int i = 0; i < this->nRows; i++) {
 		for (int j = 0; j < this->nCols; j++)
-			this->m[i][j] = that.m[i+1][j+1];
+			this->m[i][j] = that.m[i][j];
 	}
 }
 
 // destrutor
 Matrix::~Matrix()
 {
-	cout << "destruindo matriz...\n";
 	for (int i = 0; i < nRows; i++)
 		delete[] m[i];
 	delete [] m;
