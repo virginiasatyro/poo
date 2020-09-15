@@ -217,19 +217,27 @@ Matrix Matrix::operator- (const Matrix &Right)
 
 Matrix& Matrix::operator=(const Matrix &Right)
 {
-	if ((this->nRows == Right.nRows) && (this->nCols == Right.nCols))
-	{
-		if (this == &Right) return *this; //Solução de auto atribuição
-		this->~Matrix();
-		m = new double*[this->nRows];
-		for (int i = 0; i <this-> nRows; i++)
-			 m[i] = new double[this->nCols];
-
-		for (int i = 0; i < this->nRows; i++)
-			for (int j = 0; j <this-> nCols; j++)
-				this->m[i][j]= Right.m[i][j];
+	if(this == &n){
+		return *this;
 	}
-	return *this;
+	this->nRows = Right.nRows;
+    	this->nCols = Right.nCols;
+    	if(this->m != NULL){
+        	for(int i = 0; i < nRows; i++){
+ 			delete[] this->m[i];
+        	}
+		delete[] this->m;
+   	 }
+   	 this->m = new double* [nRows];
+   	 for(int i = 0; i < nRows; i++){
+        	this->m[i] = new double[nCols];
+    	}
+    	for(int i = 0; i < nRows; i++){
+        	for(int j = 0; j < nCols; j++){
+           		 this->m[i][j] = Right.m[i][j];
+        	}
+    	}
+    	return *this;
 }
 
  bool Matrix:: operator== (const Matrix &Right) 
@@ -337,9 +345,9 @@ Matrix& Matrix::operator *= (const Matrix &Right)
 {
 	if (this->nCols == Right.nRows){
 		Matrix aux(this->nRows,Right.nCols);
-		for (int i = 0; i < this->nCols; i++)
+		for (int i = 0; i < this->nRows; i++)
 		{
-			for (int j = 0; j < this->nRows; j++)
+			for (int j = 0; j < Right.nCols; j++)
 			{
 				for (int k = 0; k < this->nCols; k++)
 				{
@@ -347,8 +355,10 @@ Matrix& Matrix::operator *= (const Matrix &Right)
 				}
 			}
 		}	
-		return *this = aux;
+		return aux;
 	}
+	Matrix aux;
+	return aux;
 }
 
 istream& operator >> (istream& text, Matrix& Right) //ENTRADA
