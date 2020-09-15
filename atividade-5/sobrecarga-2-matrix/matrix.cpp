@@ -276,17 +276,17 @@ Matrix Matrix::operator* (const Matrix &Right)
 {
 	if (this->nCols == Right.nRows)
 	{
-		Matrix aux(this->nRows,Right.nCols);
-		for (int i = 0; i < this->nCols; i++)
+		Matrix aux( this->nRows, Right.nCols);
+		for (int i = 0; i < this->nRows; i++)
 		{
-			for (int j = 0; j < this->nRows; j++)
+			for (int j = 0; j < Right.nCols; j++)
 			{
 				for (int k = 0; k < this->nCols; k++)
 				{
 					aux.m[i][j]+= this->m[i][k] * Right.m[k][j];
 				}
 			}
-		}	
+		}
 		return aux;
 	}
 	Matrix aux;
