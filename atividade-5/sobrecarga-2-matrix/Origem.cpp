@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-    ifstream in("myMatrix.txt");
+    ifstream in("myFile.txt");
     Matrix Y;
     Matrix X(3,1), A(3,3), C(3,3);
     Matrix Z(3,2,7.0);
