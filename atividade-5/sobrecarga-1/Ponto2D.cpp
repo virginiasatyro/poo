@@ -7,6 +7,7 @@ using namespace std;
 int Ponto::_id = 0; // atribuidor do valor para o static contador do numero de pontos criado
 
 Ponto::Ponto(double x, double y){
+	cout << ">>Construtor chamado..Construindo ponto..<<" << _id << endl;
     _x = x;
     _y = y;
     _id++;
@@ -31,6 +32,7 @@ Ponto& Ponto::operator-- (){
     this->_y -= 1;
     return *this;
 }
+
 Ponto Ponto::operator+ (const Ponto& p) const{
     Ponto novo;
     novo._x = this->_x + p._x;
@@ -80,15 +82,18 @@ double Ponto::distToOrig()// Distancia do ponto chamada a origem  0 0
 {
 	return (sqrt(pow(_x, 2) + pow(_y, 2)));
 }
+
 double Ponto::distTo(const Ponto &p2) //Distancia do ponto chamado ao ponto de referencia
 {
 	return (sqrt(pow((_x -p2._x), 2) + pow((_y - p2._y), 2)));
 }
+
 void Ponto::sumOf(const Ponto &p2) // soma ao ponto chamado o valor do ponto p2
 {
 	_x += p2._x;
 	_y += p2._y;
 }
+
 Ponto Ponto::sumOf_(const Ponto &p2) //Retorna um objeto com a soma dos pontos chamado e do ponto p2
 {
 	Ponto soma;
