@@ -355,10 +355,8 @@ Matrix& Matrix::operator *= (const Matrix &Right)
 				}
 			}
 		}	
-		return aux;
+		return *this = aux;
 	}
-	Matrix aux;
-	return aux;
 }
 
 istream& operator >> (istream& text, Matrix& Right) //ENTRADA
