@@ -333,3 +333,22 @@ Matrix& Matrix::operator *= (const Matrix &Right)
 			this->m[i][j] *= Right.m[i][j];
 	return *this;
 }
+
+istream& operator >> (istream& text, Matrix& Right) //ENTRADA
+{
+	for (int i = 0; i < Right.nRows; i++) {
+		for (int j = 0; j < Right.nCols; j++)
+			text >> Right.m[i][j];
+	}
+	return text;
+}
+ostream& operator << (ostream& text, const Matrix& Right) //SAIDA
+{
+	for (int i = 0; i < Right.nRows; i++) {
+		for (int j = 0; j < Right.nCols; j++)
+			text << Right.m[i][j] << " ";
+		text << "\n";
+	}
+	text << "\n";
+	return text;
+}
