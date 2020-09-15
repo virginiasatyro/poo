@@ -7,7 +7,6 @@ using namespace std;
 //contrutor default - cria uma matriz vazia com nRows = nCols = 0  
 Matrix::Matrix() 
 {
-	cout << "construindo matriz...\n";
 	nRows = 0;
 	nCols = 0;
 	m = NULL;
@@ -57,7 +56,6 @@ Matrix::Matrix(std:: ifstream &myFile)
 	{
 		myFile >> nRows;
 		myFile >> nCols;
-		//cout << "n:" << nRows << " - " << nCols << endl;
 
 		m = new double*[nRows];
 		for (int i = 0; i < nRows; i++)
