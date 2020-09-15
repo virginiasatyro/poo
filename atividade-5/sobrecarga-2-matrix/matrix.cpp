@@ -231,32 +231,32 @@ Matrix& Matrix::operator=(const Matrix &Right)
 
  bool Matrix:: operator== (const Matrix &Right) 
 {
-	 bool igualdade = true;
+	 bool igualdade = false;
 	 if ((this->nRows == Right.nRows) && (this->nCols == Right.nCols))
 	 {
 		 for (int i = 0; i < nRows; i++)
 			 for (int j = 0; j < nCols; j++)
 				 if (this->m[i][j]!=Right.m[i][j])
 				 {
-					 igualdade = false;
 					 return igualdade;
-				 }	 
+				 }
+		 return igualdade = true;
 	 }
 	 return igualdade;
 }
 
  bool Matrix::operator!= (const Matrix &Right) 
 {
-	 bool igualdade = false;
+	 bool igualdade = true;
 	 if ((this->nRows == Right.nRows) && (this->nCols == Right.nCols))
 	 {
 		 for (int i = 0; i < nRows; i++)
 			 for (int j = 0; j < nCols; j++)
 				 if (this->m[i][j] != Right.m[i][j])
 				 {
-					 igualdade = true;
 					 return igualdade;
 				 }
+		 return igualdade=false;
 	 }
 	 return igualdade;
 }
