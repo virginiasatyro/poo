@@ -36,6 +36,8 @@ Ponto Ponto::operator+ (const Ponto& p) const{
     novo._x = this->_x + p._x;
     novo._y = this->_y + p._y;
     return novo;
+	//Ponto novo(this->_x + p._x,this->_y + p._y)
+	//return novo;
 }
 
 //Basic setters
