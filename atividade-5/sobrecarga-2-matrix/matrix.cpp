@@ -269,9 +269,9 @@ Matrix& Matrix::operator=(const Matrix &Right)
 
 Matrix Matrix::operator* (const Matrix &Right) 
 {
-	if ((this->nRows == Right.nCols) && (this->nCols == Right.nRows))
+	if (this->nCols == Right.nRows)
 	{
-		Matrix aux(this->nCols,Right.nRows);
+		Matrix aux(this->nRows,Right.nCols);
 		for (int i = 0; i < this->nCols; i++)
 		{
 			for (int j = 0; j < this->nRows; j++)
@@ -338,10 +338,20 @@ Matrix& Matrix::operator *= (const double n)
 
 Matrix& Matrix::operator *= (const Matrix &Right)
 {
-	for (int i = 0; i < nRows; i++)
-		for (int j = 0; j < nCols; j++)
-			this->m[i][j] *= Right.m[i][j];
-	return *this;
+	if (this->nCols == Right.nRows){
+		Matrix aux(this->nRows,Right.nCols);
+		for (int i = 0; i < this->nCols; i++)
+		{
+			for (int j = 0; j < this->nRows; j++)
+			{
+				for (int k = 0; k < this->nCols; k++)
+				{
+					aux.m[i][j]+= this->m[i][k] * Right.m[k][j];
+				}
+			}
+		}	
+		return *this = aux;
+	}
 }
 
 istream& operator >> (istream& text, Matrix& Right) //ENTRADA
