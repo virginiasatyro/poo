@@ -7,6 +7,7 @@ using namespace std;
 //contrutor default - cria uma matriz vazia com nRows = nCols = 0  
 Matrix::Matrix() 
 {
+	cout << "construindo matriz...\n";
 	nRows = 0;
 	nCols = 0;
 	m = NULL;
@@ -85,15 +86,18 @@ Matrix::Matrix(const Matrix &that)
 // destrutor
 Matrix::~Matrix()
 {
+	cout << "destruindo matriz...\n";
 	for (int i = 0; i < nRows; i++)
 		delete[] m[i];
 	delete [] m;
 }
+
 // obtem o numero de linhas
 int Matrix::getRows() const 
 {
 	return nRows;
 }
+
 // obtem o numero de colunas
 int Matrix::getCols() const 
 {
@@ -309,6 +313,7 @@ Matrix& Matrix::operator -= (const Matrix &Right)
 	}
 	return *this;
 }
+
 Matrix& Matrix::operator += (const Matrix &Right)
 {
 	if ((this->nRows == Right.nRows) && (this->nCols == Right.nCols))
@@ -324,8 +329,9 @@ Matrix& Matrix::operator *= (const double n)
 	for (int i = 0; i < nRows; i++)
 		for (int j = 0; j < nCols; j++)
 			this->m[i][j] *= n;
-return *this;
+	return *this;
 }
+
 Matrix& Matrix::operator *= (const Matrix &Right)
 {
 	for (int i = 0; i < nRows; i++)
@@ -342,6 +348,7 @@ istream& operator >> (istream& text, Matrix& Right) //ENTRADA
 	}
 	return text;
 }
+
 ostream& operator << (ostream& text, const Matrix& Right) //SAIDA
 {
 	for (int i = 0; i < Right.nRows; i++) {
