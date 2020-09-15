@@ -81,7 +81,7 @@ Matrix::Matrix(const Matrix &that)
 		this->m[i] = new double[this->nCols];
 	for (int i = 0; i < this->nRows; i++) {
 		for (int j = 0; j < this->nCols; j++)
-			this->m[i][j] = that.m[i][j];
+			this->m[i][j] = that.m[i+1][j+1];
 	}
 }
 
