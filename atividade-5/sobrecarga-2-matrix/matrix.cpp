@@ -7,7 +7,6 @@ using namespace std;
 //contrutor default - cria uma matriz vazia com nRows = nCols = 0  
 Matrix::Matrix() 
 {
-	cout << "construindo matriz...\n";
 	nRows = 0;
 	nCols = 0;
 	m = NULL;
@@ -16,8 +15,6 @@ Matrix::Matrix()
 
 Matrix::Matrix(int rows, int cols, const double &value) 
 {
-	cout << "construindo matriz...\n";
-
 	if ((rows> 0) && (cols > 0)){
 		nRows = rows;
 		nCols = cols;
@@ -59,7 +56,6 @@ Matrix::Matrix(std:: ifstream &myFile)
 	{
 		myFile >> nRows;
 		myFile >> nCols;
-		//cout << "n:" << nRows << " - " << nCols << endl;
 
 		m = new double*[nRows];
 		for (int i = 0; i < nRows; i++)
@@ -88,7 +84,6 @@ Matrix::Matrix(const Matrix &that)
 // destrutor
 Matrix::~Matrix()
 {
-	cout << "destruindo matriz...\n";
 	for (int i = 0; i < nRows; i++)
 		delete[] m[i];
 	delete [] m;
@@ -220,19 +215,27 @@ Matrix Matrix::operator- (const Matrix &Right)
 
 Matrix& Matrix::operator=(const Matrix &Right)
 {
-	if ((this->nRows == Right.nRows) && (this->nCols == Right.nCols))
-	{
-		if (this == &Right) return *this; //Solução de auto atribuição
-		this->~Matrix();
-		m = new double*[this->nRows];
-		for (int i = 0; i <this-> nRows; i++)
-			 m[i] = new double[this->nCols];
-
-		for (int i = 0; i < this->nRows; i++)
-			for (int j = 0; j <this-> nCols; j++)
-				this->m[i][j]= Right.m[i][j];
+	if(this == &n){
+		return *this;
 	}
-	return *this;
+	this->nRows = Right.nRows;
+    	this->nCols = Right.nCols;
+    	if(this->m != NULL){
+        	for(int i = 0; i < nRows; i++){
+ 			delete[] this->m[i];
+        	}
+		delete[] this->m;
+   	 }
+   	 this->m = new double* [nRows];
+   	 for(int i = 0; i < nRows; i++){
+        	this->m[i] = new double[nCols];
+    	}
+    	for(int i = 0; i < nRows; i++){
+        	for(int j = 0; j < nCols; j++){
+           		 this->m[i][j] = Right.m[i][j];
+        	}
+    	}
+    	return *this;
 }
 
  bool Matrix:: operator== (const Matrix &Right) 
@@ -269,19 +272,19 @@ Matrix& Matrix::operator=(const Matrix &Right)
 
 Matrix Matrix::operator* (const Matrix &Right) 
 {
-	if ((this->nRows == Right.nCols) && (this->nCols == Right.nRows))
+	if (this->nCols == Right.nRows)
 	{
-		Matrix aux(this->nCols,Right.nRows);
-		for (int i = 0; i < this->nCols; i++)
+		Matrix aux( this->nRows, Right.nCols);
+		for (int i = 0; i < this->nRows; i++)
 		{
-			for (int j = 0; j < this->nRows; j++)
+			for (int j = 0; j < Right.nCols; j++)
 			{
 				for (int k = 0; k < this->nCols; k++)
 				{
 					aux.m[i][j]+= this->m[i][k] * Right.m[k][j];
 				}
 			}
-		}	
+		}
 		return aux;
 	}
 	Matrix aux;
@@ -338,10 +341,20 @@ Matrix& Matrix::operator *= (const double n)
 
 Matrix& Matrix::operator *= (const Matrix &Right)
 {
-	for (int i = 0; i < nRows; i++)
-		for (int j = 0; j < nCols; j++)
-			this->m[i][j] *= Right.m[i][j];
-	return *this;
+	if (this->nCols == Right.nRows){
+		Matrix aux(this->nRows,Right.nCols);
+		for (int i = 0; i < this->nRows; i++)
+		{
+			for (int j = 0; j < Right.nCols; j++)
+			{
+				for (int k = 0; k < this->nCols; k++)
+				{
+					aux.m[i][j]+= this->m[i][k] * Right.m[k][j];
+				}
+			}
+		}	
+		return *this = aux;
+	}
 }
 
 istream& operator >> (istream& text, Matrix& Right) //ENTRADA
