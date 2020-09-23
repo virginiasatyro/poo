@@ -270,8 +270,8 @@ Matrix<T> Matrix<T>::operator* (const Matrix &Right)
 		}
 		return aux;
 	}
-	Matrix aux;
-	return aux;
+	else
+	     throw " -operacao invalidade entre as matrizes- ";
 }
 template<class T>
 Matrix<T> Matrix<T>::operator~ () // Transposta
@@ -291,7 +291,11 @@ Matrix<T> Matrix<T>::operator~ () // Transposta
 template<class T>
 T& Matrix<T>::operator() (const int& ls, const int& cs) const
 {
-	return this->m[ls - 1][cs - 1];
+	if ((ls > 0) && (cs > 0))
+		if ((ls <= nRows) && (cs <= nCols))
+			return *this->m[ls - 1][cs - 1];
+	else
+		throw "- Posicao invalida - ";
 }
 
 template<class T>
@@ -302,8 +306,10 @@ Matrix<T>& Matrix<T>::operator -= (const Matrix &Right)
 		for (int i = 0; i < nRows; i++)
 			for (int j = 0; j < nCols; j++)
 				this->m[i][j] -= Right.m[i][j];
-	}
 	return *this;
+	}
+	else
+		throw "Operacao impossivel para matrizes de diferentes dimensoes- ";
 }
 
 template<class T>
@@ -314,8 +320,10 @@ Matrix<T>& Matrix<T>::operator += (const Matrix &Right)
 		for (int i = 0; i < nRows; i++)
 			for (int j = 0; j < nCols; j++)
 				this->m[i][j] += Right.m[i][j];
-	}
 	return *this;
+	}
+	else
+		throw " -Operacao impossivel para matrizes de diferentes dimensoes- ";
 }
 
 template<class T>
@@ -343,6 +351,8 @@ Matrix<T>& Matrix<T>::operator *= (const Matrix &Right)
 		}
 		return *this = aux;
 	}
+	else
+		throw " -Operacao impossivel para matrizes de diferentes dimensoes- ";
 }
 template<class T>
 istream& operator >> (istream& text, Matrix<T>& Right) //ENTRADA
