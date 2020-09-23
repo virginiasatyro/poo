@@ -293,7 +293,7 @@ T& Matrix<T>::operator() (const int& ls, const int& cs) const
 {
 	if ((ls > 0) && (cs > 0))
 		if ((ls <= nRows) && (cs <= nCols))
-			return *this->m[ls - 1][cs - 1];
+			return this->m[ls - 1][cs - 1];
 	else
 		throw "- Posicao invalida - ";
 }
