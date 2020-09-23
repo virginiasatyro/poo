@@ -26,8 +26,8 @@ public:
 	~Matrix();
 
 	// basic getters
-	int getRows() const;
-	int getCols() const;
+	int rows() const;
+	int cols() const;
 	T get(int ls, int cs) const;
 	//Funções
 	void transpose();
