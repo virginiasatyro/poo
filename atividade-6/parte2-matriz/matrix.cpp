@@ -81,13 +81,13 @@ Matrix<T>::~Matrix()
 }
 
 template<class T>
-int Matrix<T>::getRows() const
+int Matrix<T>::rows() const
 {
 	return nRows;
 }
 
 template<class T>
-int Matrix<T>::getCols() const
+int Matrix<T>::cols() const
 {
 	return nCols;
 }
