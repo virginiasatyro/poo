@@ -10,7 +10,9 @@ using namespace std;
 class BusinessTraveler:public Traveler
 {
 public:
-	BusinessTraveler (const string &BT="1");
+
+	BusinessTraveler() :Traveler("1"), Pg("1") {};
+	BusinessTraveler (const string &BT);
 	~BusinessTraveler() {};
 	BusinessTraveler(const BusinessTraveler &That);
 	BusinessTraveler& operator= (const BusinessTraveler &Right);
@@ -22,11 +24,11 @@ protected:
 
 BusinessTraveler::BusinessTraveler(const string &BT){
 	Pg.set(BT);
+	t = BT;
 }
 
 BusinessTraveler::BusinessTraveler(const BusinessTraveler &That){
 	Pager::Pager(That.Pg);
-	//Traveler::Traveler(That.BT); //ERRO::como setar esse valor sem criar um novo metodo?
 }
 
 BusinessTraveler& BusinessTraveler:: operator =(const BusinessTraveler &Right)
@@ -35,17 +37,20 @@ BusinessTraveler& BusinessTraveler:: operator =(const BusinessTraveler &Right)
 		return *this;
 	}
 	this->Pg= Right.Pg;
+	this->t = Right.t;
 	return *this;
 }
 
 void BusinessTraveler::print()
 {
 	Pg.print();
+	cout <<"::"<< t<<endl;
 }
 
 void BusinessTraveler::set(const string &set)
 {
 	Pg.set(set);
+	t = set;
 }
 
 #endif 
