@@ -1,4 +1,3 @@
-#pragma once
 #ifndef BUSINESSTRAVELER_H
 #define BUSINESSTRAVELER_H
 
@@ -16,7 +15,7 @@ public:
 	BusinessTraveler(const BusinessTraveler &That);
 	BusinessTraveler& operator= (const BusinessTraveler &Right);
 	void print();
-
+	void set(const string &set);
 protected:
 	Pager Pg;
 };
@@ -39,8 +38,14 @@ BusinessTraveler& BusinessTraveler:: operator =(const BusinessTraveler &Right)
 	return *this;
 }
 
-void BusinessTraveler::print() {
+void BusinessTraveler::print()
+{
 	Pg.print();
+}
+
+void BusinessTraveler::set(const string &set)
+{
+	Pg.set(set);
 }
 
 #endif 
