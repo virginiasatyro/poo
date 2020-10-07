@@ -23,10 +23,10 @@ class Ponto3D: public Ponto2D{
         }
 
         // operator =
-        Ponto3D& operator= (const Ponto3D &p)
+        Ponto3D& operator= (const Ponto2D &p)
         {
-            //z = p.z;
-            //return *this;
+            Ponto2D::set(p.get_x(), p.get_y());
+            return *this;
         }
 
         // setter
@@ -64,11 +64,11 @@ int main()
     cout << p3 << endl;
     cout << p4 << endl;
 
-   /* p4 = p3;
+    p4 = p3;
     cout << p4 << endl;
 
     p4 = p1;
-    cout << p4 << endl;*/
+    cout << p4 << endl;
 
     return 0;
 }    
