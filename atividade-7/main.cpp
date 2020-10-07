@@ -6,7 +6,14 @@ using namespace std;
 
 int main()
 {
-	BusinessTraveler c("TESTE 71");
+	BusinessTraveler a("TESTE 71");
+	a.print();
+	a.set("Teste 72");
+	a.print();
+	BusinessTraveler b, c;
+	b = c = a;
+	a.print();
+	b.print();
 	c.print();
 }
 
