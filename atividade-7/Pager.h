@@ -33,7 +33,7 @@ void Pager::set(const string &set)
 	p = set;
 }
 void Pager::print() {
-	cout << p << endl;
+	cout << p;
 }
 
 #endif 
