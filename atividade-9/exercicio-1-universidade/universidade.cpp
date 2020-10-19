@@ -14,10 +14,9 @@ class Universidade {
 
 Universidade::Universidade()
 {
-    // insere professores - 2 horistas e 1 integral
-    addProfessorHorista("horista 1", 40, 1000);
-    addProfessorHorista("horista 2", 40, 800);
-    addProfessorIntegral("integral 1", 7000);
+    addProfessor("Professor Horista 1", 40, 100);
+    addProfessor("Professor Horista", 30, 100);
+    addProfessor("Professor Integral", 5000);
 }
 
 Universidade::~Universidade()
@@ -25,17 +24,17 @@ Universidade::~Universidade()
 
 }
 
-void Universidade::addProfessorHorista(string n, double nht, double vh)
+void Universidade::addProfessor(string n, double nht, double vh)
 {
     ProfHorista professor(n, nht, vh);
-    prof_horista.push_back(professor);
+    professores.push_back(&professor);
     totalPago(professor.getSalario());
 }
 
-void Universidade::addProfessorIntegral(string n, double sm)
+void Universidade::addProfessor(string n, double sm)
 {
     ProfIntegral professor(n, sm);
-    prof_integral.push_back(professor);
+    professores.push_back(&professor);
     totalPago(professor.getSalario());
 }
 

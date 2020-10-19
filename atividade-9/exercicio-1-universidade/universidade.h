@@ -13,15 +13,14 @@ using namespace std;
 
 class Universidade {
     private:
-        vector<ProfHorista> prof_horista;
-        vector<ProfIntegral> prof_integral;
+        vector<Professor*> professores;
         double total_pago;
 
     public:
         Universidade();
         ~Universidade();
-        void addProfessorHorista(string n, double nht, double vh); // adiciona professor a lista de professores
-        void addProfessorIntegral(string n, double sm);
+        void addProfessor(string n, double, double); // adiciona professor horista
+        void addProfessor(string n, double); // adiciona professor integral
         void totalPago(double);  // retorna valor pago mensalmente aos professores da Universidade
         double getTotalPago();
 };
