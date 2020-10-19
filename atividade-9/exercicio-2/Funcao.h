@@ -17,7 +17,6 @@ class Quadratica : public Funcao
 {
 public:
 	Quadratica(double a, double b, double c);
-	//double getIntegral(double limiteInferior, double limiteSuperior, double intervalos);
 	double func(double input);
 	~Quadratica();
 private:
@@ -29,7 +28,6 @@ class Senoide: public Funcao
 {
 public:
 	Senoide();
-	//double getIntegral(double limiteInferior, double limiteSuperior, double intervalos);
 	double func(double input);
 	~Senoide();
 private:
@@ -40,7 +38,6 @@ class Linear : public Funcao
 {
 public:
 	Linear(double a, double b);
-	//double getIntegral(double limiteInferior, double limiteSuperior, double intervalos);
 	double func(double input);
 	~Linear();
 private:
