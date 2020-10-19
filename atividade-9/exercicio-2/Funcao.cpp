@@ -1,6 +1,7 @@
 #include "Funcao.h"
 #include <cmath>
 //METODOS DA CLASSE FUNCAO
+
 Funcao::Funcao()
 {
 }
@@ -14,11 +15,11 @@ double Funcao::getIntegral(double limiteInferior, double limiteSuperior, double 
 	double Soma = 0;
 	double h = (limiteSuperior - limiteInferior) / intervalos;
 
-	for (double i = limiteInferior; i <= limiteSuperior; i += h)
+	for (double i = limiteInferior; i < limiteSuperior; i += h)
 	{
-		Soma = func(i) + func(i + h);
+		Soma = func(i);
 	}
-	return (Soma+((func(limiteInferior)+func(limiteSuperior))/2))*h;
+	return h*(Soma+((func(limiteInferior)+func(limiteSuperior))/2));
 }
 
 
@@ -32,7 +33,6 @@ Quadratica::Quadratica(double a, double b, double c)
 
 Quadratica::~Quadratica()
 {
-
 }
 
 double Quadratica::func(double input)
@@ -47,14 +47,13 @@ Senoide::Senoide()
 
 double Senoide::func(double input)
 {
-	if (input = 0)
+	if (input == 0)
 		return 1;
 
 	return sin(input)/input;
 }
 Senoide::~Senoide()
 {
-
 }
 
 //METODOS DA CLASSE LINEAR
@@ -62,7 +61,6 @@ Linear::Linear(double a, double b)
 {
 	_a = a;
 	_b = b;
-
 }
 
 
