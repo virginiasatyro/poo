@@ -15,12 +15,11 @@ double Funcao::getIntegral(double limiteInferior, double limiteSuperior, double 
 	double Soma = 0;
 	double h = (limiteSuperior - limiteInferior) / intervalos;
 
-	for (double i = limiteInferior; i < limiteSuperior; i += h)
+	for (double i = limiteInferior+h; i < limiteSuperior; i += h)
 	{
-		Soma = func(i);
+		Soma = 2*func(i);
 	}
-	return h*(Soma+((func(limiteInferior)+func(limiteSuperior))/2));
-}
+	return (h/2)*(Soma+((func(limiteInferior)+func(limiteSuperior))));
 
 
 //METODOS DA CLASSE QUADRATICA
