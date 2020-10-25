@@ -25,10 +25,6 @@ public:
 	int get_numeroConta();
 	int geradorNumContas();
 
-	vector<int> get_num_contas()
-	{
-		return NumContas;
-	}
 
 private:
 	int _senha, _numeroConta;
@@ -59,6 +55,10 @@ public:
 	void saca(double &valor) override;
 	void deposita(double &valor) override;
 	void tiraExtrato() override;
+
+	// getter e setters
+	void set_taxa_rend(double &taxa);
+	double get_taxa_rend();
 
 private:
 	double _TaxaRend;

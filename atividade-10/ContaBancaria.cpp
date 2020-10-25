@@ -106,6 +106,7 @@ void ContaCorrente::saca(double &valor)
 	}
 	throw "::Saldo insuficiente::";
 }
+
 void ContaCorrente::deposita(double &valor)
 {
 	this->set_Saldo(double(this->get_Saldo() + valor));
@@ -113,6 +114,7 @@ void ContaCorrente::deposita(double &valor)
 	this->set_Saldo(get_Saldo() + valor);
 	ExtratoConta[ExtratoConta.size() - 1] = new Extrato(this->get_Saldo(), valor, "DEPOSITO");
 }
+
 void ContaCorrente::tiraExtrato()
 {
 	//
@@ -125,21 +127,30 @@ ContaPoupanca::ContaPoupanca(int &senha) : ContaBancaria(senha)
 	this->set_Senha(senha);
 	this->set_nConta(geradorNumContas());
 	this->set_Saldo(0);
+	_TaxaRend = 0.0;
 }
 
 ContaPoupanca::~ContaPoupanca()
 {
-
+	// destrutor conta poupança
 }
 
 void ContaPoupanca::saca(double &valor)
 {
-
+	if (this->get_Saldo() >= valor) {
+		//ExtratoConta.resize(ExtratoConta.size() + 1);
+		this->set_Saldo(this->get_Saldo() - valor);
+		//ExtratoConta[ExtratoConta.size() - 1] = new Extrato(this->get_Saldo(), valor, "SAQUE");
+	}
+//	throw "::Saldo insuficiente::";
 }
 	
 void ContaPoupanca::deposita(double &valor)
 {
-
+	//this->set_Saldo(double(this->get_Saldo() + valor));
+	//ExtratoConta.resize(ExtratoConta.size() + 1);
+	this->set_Saldo(get_Saldo() + valor);
+	//ExtratoConta[ExtratoConta.size() - 1] = new Extrato(this->get_Saldo(), valor, "DEPOSITO");
 }
 
 void ContaPoupanca::tiraExtrato()
@@ -147,6 +158,15 @@ void ContaPoupanca::tiraExtrato()
 
 }
 
+// getter e setters
+void ContaPoupanca::set_taxa_rend(double &taxa)
+{
+	_TaxaRend = taxa;
+}
 
+double ContaPoupanca::get_taxa_rend()
+{
+	return _TaxaRend;
+}
 
 //METODOS EXTRATO
