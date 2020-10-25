@@ -117,7 +117,10 @@ void ContaCorrente::deposita(double &valor)
 
 void ContaCorrente::tiraExtrato()
 {
-	//
+	for (int i = 0; i < (signed)this->ExtratoConta.size() - 1; i++)
+	{
+		this->ExtratoConta[i]->printDados();
+	}
 }
 
 
