@@ -1,6 +1,7 @@
 #include "ContaBancaria.h"
 #include<iostream>
-#include<conio.h>
+//#include<conio.h>
+#include <stdlib.h>
 using namespace std;
 
 //METODOS CONTA BANCARIA
@@ -14,6 +15,7 @@ ContaBancaria::ContaBancaria(int &senha)
 
 ContaBancaria::~ContaBancaria()
 {
+
 }
 
 bool ContaBancaria::alteraSenha(int &senha)
@@ -32,10 +34,12 @@ void ContaBancaria::set_Senha(int &senha)
 {
 	_senha = senha;
 }
+
 void ContaBancaria::set_Saldo(double novoSaldo)
 {
 	_saldo = novoSaldo;
 }
+
 void ContaBancaria::set_nConta(int Conta)
 {
 	_numeroConta = Conta;
@@ -45,36 +49,40 @@ double ContaBancaria::get_Saldo()
 {
 	return _saldo;
 }
+
 int ContaBancaria::get_Senha()
 {
 	return _senha;
 }
+
 int ContaBancaria::get_numeroConta()
 {
 	return _numeroConta;
 }
+
 int ContaBancaria::geradorNumContas()
 {
-	int NumeroConta;
-	int repetido=0;
-	do 
-	{
-		NumeroConta = 180510000+rand() % 9999;
-		for (int i = 0; i<signed(NumContas.size()); i++)
-		{
-			if (NumeroConta == NumContas[i])
-			{
-				repetido = 1;
-			}
-		}
+	// int NumeroConta;
+	// int repetido = 0;
+	// do 
+	// {
+	// 	NumeroConta = 180510000+rand() % 9999;
+	// 	for (int i = 0; i < get_num_contas().size(); i++)
+	// 	{
+	// 		// if (NumeroConta == NumContas[i])
+	// 		// {
+	// 		// 	repetido = 1;
+	// 		// }
+	// 	}
 
-	} while (repetido == 1);
+	// } while (repetido == 1);
+	int NumeroConta = 180510000+rand() % 9999;
 
 	return NumeroConta;
 }
 
 //METODOS CONTA CORRENTE
-ContaCorrente::ContaCorrente(int &senha)
+ContaCorrente::ContaCorrente(int &senha) : ContaBancaria(senha)
 {
 	this->set_Senha(senha);
 	this->set_nConta(geradorNumContas());
@@ -111,10 +119,33 @@ void ContaCorrente::tiraExtrato()
 }
 
 
-
-
 //METODOS CONTA POUPANCA
+ContaPoupanca::ContaPoupanca(int &senha) : ContaBancaria(senha)
+{
+	this->set_Senha(senha);
+	this->set_nConta(geradorNumContas());
+	this->set_Saldo(0);
+}
 
+ContaPoupanca::~ContaPoupanca()
+{
+
+}
+
+void ContaPoupanca::saca(double &valor)
+{
+
+}
+	
+void ContaPoupanca::deposita(double &valor)
+{
+
+}
+
+void ContaPoupanca::tiraExtrato()
+{
+
+}
 
 
 

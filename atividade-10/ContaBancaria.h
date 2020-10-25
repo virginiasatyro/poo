@@ -1,7 +1,9 @@
 #ifndef CONTABANCARIA_H
 #define CONTABANCARIA_H
+
 #include <vector>
 #include "Extrato.h"
+
 using namespace std;
 
 class ContaBancaria
@@ -22,6 +24,11 @@ public:
 	int get_Senha();
 	int get_numeroConta();
 	int geradorNumContas();
+
+	vector<int> get_num_contas()
+	{
+		return NumContas;
+	}
 
 private:
 	int _senha, _numeroConta;

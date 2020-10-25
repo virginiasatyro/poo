@@ -1,10 +1,10 @@
 #ifndef EXTRATO_H
 #define EXTRATO_H
 
-#include<ctime>
+#include <ctime>
 #include <string>
-using namespace std;
 
+using namespace std;
 
 class Extrato
 {

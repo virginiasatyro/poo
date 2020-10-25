@@ -13,4 +13,5 @@ Extrato::Extrato(double valorNaConta, double &Movimentacao, string TypeMove)
 
 Extrato::~Extrato()
 {
+	
 }
