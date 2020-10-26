@@ -3,7 +3,7 @@
 
 using namespace std;
 
-vector<int> ContaCorrente::NumContas;
+vector<int> ContaBancaria::NumContas;
 
 //METODOS CONTA BANCARIA
 
@@ -16,19 +16,22 @@ ContaBancaria::ContaBancaria(int &senha)
 
 ContaBancaria::~ContaBancaria()
 {
+	for (int i = 0; i < signed(ExtratoConta.size()); i++)
+	{
+		delete ExtratoConta[i];
+	}
 }
-
+//Metodo para alterar a senha ja definida, primeiro fornecer a senha atual. depois a nova senha
 bool ContaBancaria::alteraSenha(int &senha)
 {
 	if (_senha == senha) {
-		cout << "Digite a nova senha::" << endl;
+		cout << "::Digite a nova senha::" << endl;
 		int nova_senha;
 		cin >> nova_senha;
 		set_Senha(nova_senha);
 		return 1;
 	}
 	return 0;
-		
 }
 
 //METODOS SETS
@@ -61,9 +64,13 @@ int ContaBancaria::get_numeroConta()
 int ContaBancaria::geradorNumContas()
 {
 	int NumeroConta;
+	// O codigo cria um numero da conta bancaria e verifica se esse numero ja foi utilizado
+	// caso o numero de conta coincida com algum numero existe o codigo ira gerar um novo numero de conta
+	// e verificar novamente até encontrar um numero de conta bancario unico
 	int repetido=0;
 	do 
 	{
+		repetido = 0;
 		NumeroConta = 180510000+rand() % 9999;
 		for (int i = 0; i<signed(NumContas.size()); i++)
 		{
@@ -72,9 +79,7 @@ int ContaBancaria::geradorNumContas()
 				repetido = 1;
 			}
 		}
-
 	} while (repetido == 1);
-
 	return NumeroConta;
 }
 
@@ -103,20 +108,22 @@ void ContaCorrente::saca(double &valor)
 		ExtratoConta[ExtratoConta.size() - 1] = new Extrato(this->get_Saldo(), valor, "SAQUE");
 		nTransacoes++;
 	}
-	throw "::Saldo insuficiente::";
+	throw  Erro ("::Saldo insuficiente::");
 }
 
 void ContaCorrente::deposita(double valor)
-{
-	this->set_Saldo(double(this->get_Saldo() + valor));
+{// REALIZA O DEPOSITO E REGISTRA A OPERACAO NO VETOR DE EXTRATO E ADICIONA +1 NO NUMERO DE TRANSACOES
+	this->set_Saldo(this->get_Saldo() + valor);
 	ExtratoConta.resize(ExtratoConta.size() + 1);
-	this->set_Saldo(get_Saldo() + valor);
 	ExtratoConta[ExtratoConta.size() - 1] = new Extrato(this->get_Saldo(), valor, "DEPOSITO");
 	nTransacoes++;
 }
 void ContaCorrente::tiraExtrato()
 {
-	for (int i = 0; i < (signed)this->ExtratoConta.size() - 1; i++)
+	cout << ":: Conta numero: " << this->get_numeroConta() << " ::" << endl;
+	cout << ":: Numero de transacoes " << nTransacoes << "::" << endl;
+	cout << ":: OPERACAO :: VALOR :: SALDO ::"<<endl;
+	for (int i = 0; i < (signed)this->ExtratoConta.size(); i++)
 	{
 		this->ExtratoConta[i]->printDados();
 	}
@@ -150,26 +157,27 @@ void ContaPoupanca::saca(double &valor)
 		this->set_Saldo(get_Saldo() - valor);
 		ExtratoConta[ExtratoConta.size() - 1] = new Extrato(this->get_Saldo(), valor, "SAQUE");
 	}
-	throw "::Saldo insuficiente::";
+	throw  Erro("::Saldo insuficiente Operacao cancelada::");
 }
-
+// REALIZA O DEPOSITO E REGISTRA A OPERACAO NO VETOR DE EXTRATO
 void ContaPoupanca::deposita(double valor)
 {
-	//this->set_Saldo(double(this->get_Saldo() + valor));
 	ExtratoConta.resize(ExtratoConta.size() + 1);
 	this->set_Saldo(this->get_Saldo() + valor);
 	ExtratoConta[ExtratoConta.size() - 1] = new Extrato(this->get_Saldo(), valor, "DEPOSITO");
 }
 void ContaPoupanca::tiraExtrato()
 {
-	cout << " Taxa de Rendimento: " << _TaxaRend <<"::"<< endl;
-		for (int i = 0; i < (signed)this->ExtratoConta.size() - 1; i++)
+	cout << ":: Conta numero: " << this->get_numeroConta() << " ::" << endl;
+	cout << ":: Taxa de Rendimento: " << _TaxaRend <<"::"<< endl;
+	cout << "::  OPERACAO  ::  VALOR  ::  SALDO ::" << endl;
+		for (int i = 0; i < (signed)this->ExtratoConta.size(); i++)
 		{
 			this->ExtratoConta[i]->printDados();
 		}
+	cout << " " << endl;
 }
-
-
+// METODO VIRTUAL POLIMORFICO PARA CADA TIPO DE CLASSE DERIVADA DA CLASSE BASE ABSTRATA
 double ContaPoupanca::DadoUnico()
 {
 	return this->_TaxaRend;
