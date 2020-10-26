@@ -3,9 +3,10 @@
 
 #include<ctime>
 #include <string>
+
 using namespace std;
 
-
+// classe para registrar as transacoes realizadas nas contas bancarias
 class Extrato
 {
 public:
@@ -21,5 +22,4 @@ private:
 	double _Movimentacao;
 	string _TipoMovimentacao;
 };
-
 #endif
