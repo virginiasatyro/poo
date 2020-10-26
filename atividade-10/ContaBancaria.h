@@ -1,6 +1,7 @@
 #ifndef CONTABANCARIA_H
 #define CONTABANCARIA_H
 #include <vector>
+#include <iostream>
 #include "Extrato.h"
 using namespace std;
 
@@ -29,7 +30,10 @@ public:
 	void set_nConta(int Conta);
 	int get_Senha();
 	int get_numeroConta();
+	//Metodo para gerar o numero de conta UNICO para cada conta Bancaria criada
 	int geradorNumContas();
+	// metodo para o throw
+	
 
 private:
 	int _senha, _numeroConta;
@@ -71,4 +75,10 @@ private:
 	double _TaxaRend;
 };
 
+class Erro {
+	string tipo_erro;
+public:
+	Erro(const string &tp) : tipo_erro(tp) {};
+	void out() { cout << tipo_erro; };
+};
 #endif
