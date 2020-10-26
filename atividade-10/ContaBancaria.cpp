@@ -1,8 +1,9 @@
 #include "ContaBancaria.h"
 #include<iostream>
-//#include<conio.h>
-#include <stdlib.h>
+
 using namespace std;
+
+vector<int> ContaCorrente::NumContas;
 
 //METODOS CONTA BANCARIA
 
@@ -15,7 +16,6 @@ ContaBancaria::ContaBancaria(int &senha)
 
 ContaBancaria::~ContaBancaria()
 {
-
 }
 
 bool ContaBancaria::alteraSenha(int &senha)
@@ -30,63 +30,61 @@ bool ContaBancaria::alteraSenha(int &senha)
 	return 0;
 		
 }
+
+//METODOS SETS
 void ContaBancaria::set_Senha(int &senha)
 {
 	_senha = senha;
 }
-
 void ContaBancaria::set_Saldo(double novoSaldo)
 {
 	_saldo = novoSaldo;
 }
-
 void ContaBancaria::set_nConta(int Conta)
 {
 	_numeroConta = Conta;
 }
-
+// METODOS GETS
 double ContaBancaria::get_Saldo()
 {
 	return _saldo;
 }
-
 int ContaBancaria::get_Senha()
 {
 	return _senha;
 }
-
 int ContaBancaria::get_numeroConta()
 {
 	return _numeroConta;
 }
-
+//DEMAIS METODOS
 int ContaBancaria::geradorNumContas()
 {
-	// int NumeroConta;
-	// int repetido = 0;
-	// do 
-	// {
-	// 	NumeroConta = 180510000+rand() % 9999;
-	// 	for (int i = 0; i < get_num_contas().size(); i++)
-	// 	{
-	// 		// if (NumeroConta == NumContas[i])
-	// 		// {
-	// 		// 	repetido = 1;
-	// 		// }
-	// 	}
+	int NumeroConta;
+	int repetido=0;
+	do 
+	{
+		NumeroConta = 180510000+rand() % 9999;
+		for (int i = 0; i<signed(NumContas.size()); i++)
+		{
+			if (NumeroConta == NumContas[i])
+			{
+				repetido = 1;
+			}
+		}
 
-	// } while (repetido == 1);
-	int NumeroConta = 180510000+rand() % 9999;
+	} while (repetido == 1);
 
 	return NumeroConta;
 }
 
 //METODOS CONTA CORRENTE
-ContaCorrente::ContaCorrente(int &senha) : ContaBancaria(senha)
+ContaCorrente::ContaCorrente(int &senha):ContaBancaria(senha)
 {
 	this->set_Senha(senha);
 	this->set_nConta(geradorNumContas());
 	this->set_Saldo(0);
+	nTransacoes = 0;
 }
 
 ContaCorrente::~ContaCorrente()
@@ -96,86 +94,88 @@ ContaCorrente::~ContaCorrente()
 		delete ExtratoConta[i];
 	}
 }
-
+// FUNCOES VIRTUAIS SENDO DEFINIDAS
 void ContaCorrente::saca(double &valor)
 {
 	if (get_Saldo() >= valor) {
 		ExtratoConta.resize(ExtratoConta.size() + 1);
 		this->set_Saldo(get_Saldo() - valor);
 		ExtratoConta[ExtratoConta.size() - 1] = new Extrato(this->get_Saldo(), valor, "SAQUE");
-	} else {
-		throw "::Saldo insuficiente::";
+		nTransacoes++;
 	}
+	throw "::Saldo insuficiente::";
 }
 
-void ContaCorrente::deposita(double &valor)
+void ContaCorrente::deposita(double valor)
 {
 	this->set_Saldo(double(this->get_Saldo() + valor));
 	ExtratoConta.resize(ExtratoConta.size() + 1);
-	//this->set_Saldo(get_Saldo() + valor);
+	this->set_Saldo(get_Saldo() + valor);
 	ExtratoConta[ExtratoConta.size() - 1] = new Extrato(this->get_Saldo(), valor, "DEPOSITO");
+	nTransacoes++;
 }
-
 void ContaCorrente::tiraExtrato()
 {
-	for (int i = 0; i < (signed)this->ExtratoConta.size(); i++)
+	for (int i = 0; i < (signed)this->ExtratoConta.size() - 1; i++)
 	{
 		this->ExtratoConta[i]->printDados();
 	}
 }
+double ContaCorrente::DadoUnico()
+{
+	return this->nTransacoes;
+}
 
 
-//METODOS CONTA POUPANCA -----------------------------------------------------------
-ContaPoupanca::ContaPoupanca(int &senha) : ContaBancaria(senha)
+//METODOS CONTA POUPANCA
+ContaPoupanca::ContaPoupanca(int &senha) :ContaBancaria(senha)
 {
 	this->set_Senha(senha);
 	this->set_nConta(geradorNumContas());
 	this->set_Saldo(0);
-	_TaxaRend = 0.0;
-	cout << "EXTRATO POUPANCA SIZE: " << ExtratoPoupanca.size() << endl;
+	this->set_TaxaRend(0.99); //Preset padrao da taxa do banco, pode ser alterada por funcao
 }
-
 ContaPoupanca::~ContaPoupanca()
 {
-	// destrutor conta poupança
+	for (int i = 0; i < signed(ExtratoConta.size()); i++)
+	{
+		delete ExtratoConta[i];
+	}
 }
-
+// FUNCOES VIRTUAIS SENDO DEFINIDAS
 void ContaPoupanca::saca(double &valor)
 {
-	if (this->get_Saldo() >= valor) {
-		ExtratoPoupanca.resize(ExtratoPoupanca.size() + 1);
-		this->set_Saldo(this->get_Saldo() - valor);
-		ExtratoPoupanca[ExtratoPoupanca.size() - 1] = new Extrato(this->get_Saldo(), valor, "SAQUE");
-	} else {
-		throw "::Saldo insuficiente::";
+	if (get_Saldo() >= valor) {
+		ExtratoConta.resize(ExtratoConta.size() + 1);
+		this->set_Saldo(get_Saldo() - valor);
+		ExtratoConta[ExtratoConta.size() - 1] = new Extrato(this->get_Saldo(), valor, "SAQUE");
 	}
+	throw "::Saldo insuficiente::";
 }
-	
-void ContaPoupanca::deposita(double &valor)
+
+void ContaPoupanca::deposita(double valor)
 {
 	//this->set_Saldo(double(this->get_Saldo() + valor));
-	ExtratoPoupanca.resize(ExtratoPoupanca.size() + 1);
-	this->set_Saldo(get_Saldo() + valor);
-	ExtratoPoupanca[ExtratoPoupanca.size() - 1] = new Extrato(this->get_Saldo(), valor, "DEPOSITO");
+	ExtratoConta.resize(ExtratoConta.size() + 1);
+	this->set_Saldo(this->get_Saldo() + valor);
+	ExtratoConta[ExtratoConta.size() - 1] = new Extrato(this->get_Saldo(), valor, "DEPOSITO");
 }
-
 void ContaPoupanca::tiraExtrato()
 {
-	for (int i = 0; i < (signed)this->ExtratoPoupanca.size(); i++)
-	{
-		this->ExtratoPoupanca[i]->printDados();
-	}
+	cout << " Taxa de Rendimento: " << _TaxaRend <<"::"<< endl;
+		for (int i = 0; i < (signed)this->ExtratoConta.size() - 1; i++)
+		{
+			this->ExtratoConta[i]->printDados();
+		}
 }
 
-// getter e setters
-void ContaPoupanca::set_taxa_rend(double &taxa)
+
+double ContaPoupanca::DadoUnico()
 {
-	_TaxaRend = taxa;
+	return this->_TaxaRend;
 }
-
-double ContaPoupanca::get_taxa_rend()
+// METODO SETS
+void ContaPoupanca::set_TaxaRend(double novaTaxa)
 {
-	return _TaxaRend;
+	_TaxaRend = novaTaxa;
 }
-
-//METODOS EXTRATO
