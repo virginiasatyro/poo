@@ -1,9 +1,7 @@
 #ifndef CONTABANCARIA_H
 #define CONTABANCARIA_H
-
 #include <vector>
 #include "Extrato.h"
-
 using namespace std;
 
 class ContaBancaria
@@ -12,8 +10,16 @@ public:
 	ContaBancaria(int &senha);
 	~ContaBancaria();
 	virtual void saca(double &valor)=0;
-	virtual void deposita(double &valor) = 0;
+	virtual void deposita(double valor) = 0;
 	virtual void tiraExtrato()=0;
+	virtual double DadoUnico() = 0;
+	//Por estarmos implementando a um vetor de extrato para ambas as classes poupanca e corrente
+	//Criamos esse metodo virtual para imprimir dados unicos de cada classe, para que nao fosse impresso o 
+	//extrato toda vez que se consultasse a taxa de rendimento ou o numero de transacoes, tornando o
+	//programa mais proximo da realidade 
+
+	//O conteudo cobrado neste TP nessa aplicado na funcao abaixo -Polimorfismo e RTTI
+
 
 	//metodos getters e setters
 	bool alteraSenha(int &senha);
@@ -25,11 +31,12 @@ public:
 	int get_numeroConta();
 	int geradorNumContas();
 
-
 private:
 	int _senha, _numeroConta;
 	double _saldo;
+protected:
 	static vector<int> NumContas;
+	vector<Extrato*> ExtratoConta;
 };
 
 class ContaCorrente : public ContaBancaria
@@ -39,11 +46,12 @@ public:
 	~ContaCorrente();
 
 	void saca(double &valor) override;
-	void deposita(double &valor) override;
+	void deposita(double valor) override;
 	void tiraExtrato() override;
+	double DadoUnico() override;
 
 private:
-	vector<Extrato*> ExtratoConta;
+	int nTransacoes;
 };
 
 class ContaPoupanca :public ContaBancaria
@@ -53,16 +61,14 @@ public:
 	~ContaPoupanca();
 
 	void saca(double &valor) override;
-	void deposita(double &valor) override;
+	void deposita(double valor) override;
 	void tiraExtrato() override;
+	double DadoUnico() override;
 
-	// getter e setters
-	void set_taxa_rend(double &taxa);
-	double get_taxa_rend();
+	void set_TaxaRend(double novaTaxa);
 
 private:
 	double _TaxaRend;
-	vector<Extrato*> ExtratoPoupanca;
 };
 
 #endif
