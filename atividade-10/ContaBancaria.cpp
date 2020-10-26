@@ -103,15 +103,16 @@ void ContaCorrente::saca(double &valor)
 		ExtratoConta.resize(ExtratoConta.size() + 1);
 		this->set_Saldo(get_Saldo() - valor);
 		ExtratoConta[ExtratoConta.size() - 1] = new Extrato(this->get_Saldo(), valor, "SAQUE");
+	} else {
+		throw "::Saldo insuficiente::";
 	}
-	throw "::Saldo insuficiente::";
 }
 
 void ContaCorrente::deposita(double &valor)
 {
 	this->set_Saldo(double(this->get_Saldo() + valor));
 	ExtratoConta.resize(ExtratoConta.size() + 1);
-	this->set_Saldo(get_Saldo() + valor);
+	//this->set_Saldo(get_Saldo() + valor);
 	ExtratoConta[ExtratoConta.size() - 1] = new Extrato(this->get_Saldo(), valor, "DEPOSITO");
 }
 
@@ -141,19 +142,20 @@ ContaPoupanca::~ContaPoupanca()
 void ContaPoupanca::saca(double &valor)
 {
 	if (this->get_Saldo() >= valor) {
-		//ExtratoConta.resize(ExtratoConta.size() + 1);
+		ExtratoConta.resize(ExtratoConta.size() + 1);
 		this->set_Saldo(this->get_Saldo() - valor);
-		//ExtratoConta[ExtratoConta.size() - 1] = new Extrato(this->get_Saldo(), valor, "SAQUE");
+		ExtratoConta[ExtratoConta.size() - 1] = new Extrato(this->get_Saldo(), valor, "SAQUE");
+	} else {
+		throw "::Saldo insuficiente::";
 	}
-//	throw "::Saldo insuficiente::";
 }
 	
 void ContaPoupanca::deposita(double &valor)
 {
-	//this->set_Saldo(double(this->get_Saldo() + valor));
-	//ExtratoConta.resize(ExtratoConta.size() + 1);
-	this->set_Saldo(get_Saldo() + valor);
-	//ExtratoConta[ExtratoConta.size() - 1] = new Extrato(this->get_Saldo(), valor, "DEPOSITO");
+	this->set_Saldo(double(this->get_Saldo() + valor));
+	ExtratoConta.resize(ExtratoConta.size() + 1);
+	//this->set_Saldo(get_Saldo() + valor);
+	ExtratoConta[ExtratoConta.size() - 1] = new Extrato(this->get_Saldo(), valor, "DEPOSITO");
 }
 
 void ContaPoupanca::tiraExtrato()

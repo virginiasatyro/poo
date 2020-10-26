@@ -62,6 +62,7 @@ public:
 
 private:
 	double _TaxaRend;
+	vector<Extrato*> ExtratoConta;
 };
 
 #endif
