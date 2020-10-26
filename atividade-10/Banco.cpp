@@ -16,9 +16,30 @@ int main()
     double deposito = 1000.00;
     minha_poupanca.deposita(deposito);
     cout << "Saldo: " << minha_poupanca.get_Saldo() << endl;
+    cout << "Extrato poupanca: " << endl;
+    minha_poupanca.tiraExtrato();
+
     double saque = 99.99;
+    cout << "********************************************************" << endl;
     minha_poupanca.saca(saque);
     cout << "Saldo: " << minha_poupanca.get_Saldo() << endl;
+    cout << "Extrato poupanca: " << endl;
+    minha_poupanca.tiraExtrato();
+
+    minha_poupanca.saca(saque);
+    cout << "Saldo: " << minha_poupanca.get_Saldo() << endl;
+    cout << "Extrato poupanca: " << endl;
+    minha_poupanca.tiraExtrato();
+
+    // minha_poupanca.deposita(deposito);
+    // cout << "Saldo poupanca: " << minha_poupanca.get_Saldo() << endl;
+    // cout << "Extrato poupanca: " << endl;
+    // minha_poupanca.tiraExtrato();
+
+    // minha_poupanca.saca(saque);
+    // cout << "Saldo: " << minha_poupanca.get_Saldo() << endl;
+    // cout << "Extrato poupanca: " << endl;
+    // minha_poupanca.tiraExtrato();
 
     int senha2 = 4321;
     ContaCorrente minha_conta(senha2);
@@ -28,10 +49,12 @@ int main()
 
     minha_conta.deposita(deposito);
     cout << "Saldo: " << minha_conta.get_Saldo() << endl;
+    cout << "Extrato: " << endl;
+    minha_conta.tiraExtrato();
     minha_conta.saca(saque);
     cout << "Saldo: " << minha_conta.get_Saldo() << endl;
+    cout << "Extrato: " << endl;
+    minha_conta.tiraExtrato();
 
-    minha_poupanca.deposita(deposito);
-    cout << "Saldo poupanca: " << minha_poupanca.get_Saldo() << endl;
     return 0;
 }

@@ -118,20 +118,21 @@ void ContaCorrente::deposita(double &valor)
 
 void ContaCorrente::tiraExtrato()
 {
-	for (int i = 0; i < (signed)this->ExtratoConta.size() - 1; i++)
+	for (int i = 0; i < (signed)this->ExtratoConta.size(); i++)
 	{
 		this->ExtratoConta[i]->printDados();
 	}
 }
 
 
-//METODOS CONTA POUPANCA
+//METODOS CONTA POUPANCA -----------------------------------------------------------
 ContaPoupanca::ContaPoupanca(int &senha) : ContaBancaria(senha)
 {
 	this->set_Senha(senha);
 	this->set_nConta(geradorNumContas());
 	this->set_Saldo(0);
 	_TaxaRend = 0.0;
+	cout << "EXTRATO POUPANCA SIZE: " << ExtratoPoupanca.size() << endl;
 }
 
 ContaPoupanca::~ContaPoupanca()
@@ -142,9 +143,9 @@ ContaPoupanca::~ContaPoupanca()
 void ContaPoupanca::saca(double &valor)
 {
 	if (this->get_Saldo() >= valor) {
-		ExtratoConta.resize(ExtratoConta.size() + 1);
+		ExtratoPoupanca.resize(ExtratoPoupanca.size() + 1);
 		this->set_Saldo(this->get_Saldo() - valor);
-		ExtratoConta[ExtratoConta.size() - 1] = new Extrato(this->get_Saldo(), valor, "SAQUE");
+		ExtratoPoupanca[ExtratoPoupanca.size() - 1] = new Extrato(this->get_Saldo(), valor, "SAQUE");
 	} else {
 		throw "::Saldo insuficiente::";
 	}
@@ -152,15 +153,18 @@ void ContaPoupanca::saca(double &valor)
 	
 void ContaPoupanca::deposita(double &valor)
 {
-	this->set_Saldo(double(this->get_Saldo() + valor));
-	ExtratoConta.resize(ExtratoConta.size() + 1);
-	//this->set_Saldo(get_Saldo() + valor);
-	ExtratoConta[ExtratoConta.size() - 1] = new Extrato(this->get_Saldo(), valor, "DEPOSITO");
+	//this->set_Saldo(double(this->get_Saldo() + valor));
+	ExtratoPoupanca.resize(ExtratoPoupanca.size() + 1);
+	this->set_Saldo(get_Saldo() + valor);
+	ExtratoPoupanca[ExtratoPoupanca.size() - 1] = new Extrato(this->get_Saldo(), valor, "DEPOSITO");
 }
 
 void ContaPoupanca::tiraExtrato()
 {
-
+	for (int i = 0; i < (signed)this->ExtratoPoupanca.size(); i++)
+	{
+		this->ExtratoPoupanca[i]->printDados();
+	}
 }
 
 // getter e setters
