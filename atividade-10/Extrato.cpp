@@ -11,7 +11,6 @@ Extrato::Extrato(double valorNaConta, double &Movimentacao, string TypeMove)
 	_TipoMovimentacao=TypeMove;
 }
 
-
 Extrato::~Extrato()
 {
 }
@@ -31,6 +30,5 @@ string Extrato::get_TipoMovimentacao()
 
 void Extrato::printDados()
 {
-	cout << this->get_TipoMovimentacao() << "::" << this->get_Movimentacao() << "::" << this->get_ValorNaConta()<<"::"<<endl;
-
+	cout <<":: "<< this->get_TipoMovimentacao() << " :: R$: " << this->get_Movimentacao() << " :: R$:" << this->get_ValorNaConta()<<" :: "<<endl;
 }
